@@ -9,8 +9,8 @@ const { find } = require('./models/FxRates');
 const setFxRates = require("./FxRates/setFxRates");
 const count = require('./functions/count')
 
-const port = process.env.PORT || 3001
-const mongodb = process.env.MONGODB || " mongodb://mongo:27017/currencyConverter" //"mongodb://uvalait1:Slaptas326!@ds117070.mlab.com:17070/heroku_dmlslhq8";
+const port = 3001
+const mongodb = " mongodb://mongo:27017/currencyConverter"
 
 const app = express();
 app.use(bodyParser.json());
