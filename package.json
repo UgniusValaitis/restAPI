@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "run": "nodemon app.js",
     "start": "node app.js",
     "test": "mocha"
   },
@@ -20,7 +19,6 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
-    "mocha": "^8.1.1",
-    "nodemon": "^2.0.4"
+    "mocha": "^8.1.1"
   }
 }
