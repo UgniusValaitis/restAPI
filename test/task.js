@@ -1,8 +1,9 @@
 const chai = require("chai");
 const chaiHttp = require("chai-http");
-// const request = require('supertest');
 const server = require('../app');
 const { expect } = require("chai");
+
+// BEFORE RUNNING TEST CHANGE DB TO localhost from mongo in ../db/db.js
 
 chai.expect();
 chai.use(chaiHttp);

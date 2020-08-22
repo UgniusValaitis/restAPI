@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const mongodb = "mongodb://localhost:27017/currencyConverter"
+const mongodb = "mongodb://mongo:27017/currencyConverter"
 function connect() {
     return new Promise((resolve, reject) => {
         mongoose.connect(mongodb,
