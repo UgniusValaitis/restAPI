@@ -1,24 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
-const FxRates = require("./models/FxRates")
-const FxNames = require("./models/FxNames");
-const User = require("./models/User");
-const Activity = require("./models/Activity")
-const { find } = require('./models/FxRates');
+const FxRates = require("./db/models/FxRates")
+const FxNames = require("./db/models/FxNames");
+const User = require("./db/models/User");
+const Activity = require("./db/models/Activity")
+const { find, model } = require('./db/models/FxRates');
+const conn = require("./db/db");
 const setFxRates = require("./FxRates/setFxRates");
 const count = require('./functions/count')
 
 const port = 3001
-const mongodb = " mongodb://mongo:27017/currencyConverter"
-
 const app = express();
 app.use(bodyParser.json());
-mongoose.connect(
-    mongodb,
-    { useNewUrlParser: true, useUnifiedTopology: true },
-    () => { console.log('DB Connected') })
-setFxRates.getRates()
 
 
 app.get('/', async (req, res) => {
@@ -42,14 +36,14 @@ app.get('/rates', async (req, res) => {
 
 app.get("/:fromCcy/:toCcy", async (req, res) => {
     try {
-        const from = await FxRates.find({ ccy: req.params.fromCcy }, "rate ccy");
+        const from = await FxRates.find({ ccy: req.params.fromCcy });
         try {
             const to = await FxRates.find({ ccy: req.params.toCcy }, "rate ccy");
             try {
                 const data = await count.exRate(from, to);
 
                 res.status(200).json(data);
-            } catch (err) { res.json("Calculation ERROR: " + err) };
+            } catch (err) { res.status(400).json("Calculation ERROR: " + err) };
         } catch (err) { res.status(400).json(err) };
     } catch (err) {
         res.status(400).json(err);
@@ -97,5 +91,19 @@ app.post("/activity", (req, res) => {
         .then((mes) => res.status(200).json(mes))
         .catch((err) => res.status(400).json(err));
 });
+conn.connect()
+    .then(() => {
+        setFxRates.getRates()
+            .then(() => {
+                setFxRates.getNames()
+                    .then(() => {
+                        app.listen(port, () => {
+                            console.log("Listening on port: " + port);
+                            app.emit('serverStarted');
+                        });
+                    })
+            });
+    })
+    .catch((err) => console.log("Db connect ERROR: " + err));
 
-app.listen(port)
+module.exports = app
