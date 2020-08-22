@@ -13,6 +13,7 @@ const count = require('./functions/count')
 const port = 3001
 const app = express();
 app.use(bodyParser.json());
+app.use(cors({ origin: '*' }));
 
 
 app.get('/', async (req, res) => {
