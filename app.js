@@ -111,7 +111,7 @@ conn.connect()
                 setFxRates.getNames()
                     .then(() => {
                         app.listen(port, () => {
-                            console.log("Listening on port: " + port);
+                            console.log("Server is listening: ");
                             app.emit('serverStarted');
                         });
                     })
