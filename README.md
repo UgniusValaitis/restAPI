@@ -7,14 +7,14 @@
 ### Server is deployed at http://ugniusvalaitis.xyz
 
 ## buld in unit test with Mocha and Chai
-### to run tests first 
+### to run tests :
 
 ### IN ./db/db.js 
 
-### CHNAGE const mongodb = "mongodb://mongo:27017/currencyConverter"
+### CHNAGE (const mongodb = "mongodb://mongo:27017/currencyConverter")
 
 
-### TO const mongodb = "mongodb://localhost:27017/currencyConverter"
+### TO (const mongodb = "mongodb://localhost:27017/currencyConverter")
 
 
 ### THEN run: npm test
