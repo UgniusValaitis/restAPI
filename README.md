@@ -2,10 +2,17 @@
 
 ## Docker containerized
 
-### to try out and start server run docker-compose up
+### to try out and start server run :
+
+
+docker-compose build 
+
+
+docker-compose up
+
+HTTPS will not authorize (uses self signed certificate)
 
 ### Server is deployed at http://ugniusvalaitis.xyz
-
 ## buld in unit test with Mocha and Chai
 ### to run tests :
 
