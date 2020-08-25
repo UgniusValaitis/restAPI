@@ -18,7 +18,7 @@ HTTPS will not authorize (uses self signed certificate)
 
 ### IN ./db/db.js 
 
-### CHNAGE (const mongodb = "mongodb://mongo:27017/currencyConverter")
+### CHANAGE (const mongodb = "mongodb://mongo:27017/currencyConverter")
 
 
 ### TO (const mongodb = "mongodb://localhost:27017/currencyConverter")
