@@ -1,4 +1,7 @@
 const express = require('express');
+const fs = require('fs');
+const http = require('http');
+const https = require("https");
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 const FxRates = require("./db/models/FxRates")
@@ -10,7 +13,13 @@ const conn = require("./db/db");
 const setFxRates = require("./FxRates/setFxRates");
 const count = require('./functions/count')
 
-const port = 3001
+
+const httpPort = 3000
+const httpsPort = 3001
+const credentials = {
+    'key': fs.readFileSync('./SSL/key.pem'),
+    'cert': fs.readFileSync('./SSL/cert.pem')
+}
 const app = express();
 app.use(bodyParser.json());
 app.use((req, res, next) => {
@@ -110,10 +119,13 @@ conn.connect()
             .then(() => {
                 setFxRates.getNames()
                     .then(() => {
-                        app.listen(port, () => {
-                            console.log("Server is listening: ");
-                            app.emit('serverStarted');
-                        });
+
+                        const httpServer = http.createServer(app)
+                        const httpsServer = https.createServer(credentials, app)
+                        console.log("Server is listening: ");
+                        app.emit('serverStarted');
+                        httpServer.listen(httpPort, () => (console.log("HTTP listening")));
+                        httpsServer.listen(httpsPort, () => (console.log("HTTPS listening")))
                     })
             });
     })
