@@ -1,20 +1,20 @@
-Back end restAPI project for Currency Converter 
+# Back end restAPI project for Currency Converter 
 
-Docker containerized || buld in unit test with Mocha and Chai
+## Docker containerized
 
-to try out and start server run docker-compose up
+### to try out and start server run docker-compose up
 
-Server is deployed at http://ugniusvalaitis.xyz
+### Server is deployed at http://ugniusvalaitis.xyz
 
+## buld in unit test with Mocha and Chai
+### to run tests first 
 
-to run tests first 
+### IN ./db/db.js 
 
-in ./db/db.js 
-
-CHNAGE const mongodb = "mongodb://mongo:27017/currencyConverter"
-
-
-TO const mongodb = "mongodb://localhost:27017/currencyConverter"
+### CHNAGE const mongodb = "mongodb://mongo:27017/currencyConverter"
 
 
-THEN run: npm test
+### TO const mongodb = "mongodb://localhost:27017/currencyConverter"
+
+
+### THEN run: npm test
